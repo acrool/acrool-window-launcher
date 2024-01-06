@@ -1,68 +1,40 @@
-import {ulid} from 'ulid';
-import {checkIsSafariBrowser} from './utils';
-import {IBrowser} from './types';
-import {Chrome, Safari} from './Browsers';
+import {getBrowser, EBrowser, asyncOpen} from './utils';
+import {IOpenOption} from './types';
 
 
-const getBrowser = () => {
-    if(checkIsSafariBrowser()) return Safari;
-    // if(checkIsSafariBrowser()) return Firefox;
-    // if(checkIsSafariBrowser()) return AndroidWebview;
-    // if(checkIsSafariBrowser()) return IOSWebview;
-
-    return Chrome;
-};
-
-
-interface IOptions {
-    openMode?: TOpenMode
-    readyUrl?: string // 指定一個暫時開啟的頁面路徑，避免白頁
-    noticeCloseUrl?: string // 指定一個通知使用者手動關閉的頁面路徑，避免白頁
-}
-type TOpenMode = 'blank'|'multiple'|'self';
-
+/**
+ * 瀏覽器頁籤啟動器
+ */
 export default class Launcher {
-    _browser: IBrowser;
-    _prefixName?: string;
-    _openTargetId?: string;
-    _targetWindow: any;
-    _readyUrl: string;
-    _noticeCloseUrl: string;
-
     _childWindow: WindowProxy|null = null;
 
-    constructor(options?: IOptions) {
-        this._openTargetId = this._createOpenTargetId();
-        this._browser = new (getBrowser());
-        this._readyUrl = options?.readyUrl ?? 'about:blank';
-        this._noticeCloseUrl = options?.noticeCloseUrl ?? 'about:blank';
+    get name(): EBrowser{
+        return getBrowser();
     }
 
     /**
-     * 建立目標視窗ID
+     * 打開頁籤
      */
-    _createOpenTargetId(){
-        return ulid();
+    async open(url: string, option?: IOpenOption){
+        if(option?.isPreClose){
+            this.close();
+        }
+        if(option?.isTargetSelf){
+            window.location.href = url;
+        }else{
+            this._childWindow = await asyncOpen(url);
+        }
+
+        return this;
     }
 
     /**
-     * 準備
-     */
-    ready(){
-        this._childWindow = this._browser.ready(this._readyUrl);
-    }
-
-    /**
-     * 打開
-     */
-    open(url: string){
-        this._childWindow = this._browser.open(url, this._childWindow);
-    }
-
-    /**
-     * 關閉
+     * 關閉頁籤
      */
     close(){
-        this._browser.close(this._childWindow);
+        if(this._childWindow && !this._childWindow.closed){
+            this._childWindow.close();
+        }
+        return this;
     }
 }
