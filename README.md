@@ -1,25 +1,58 @@
-# bear-jsutils
+# Bear Window Launcher
 
-> Common tools and methods for project development
+<p align="center">
+    This is a window launcher for front-end compatibility with browser issues when using window.open.
+</p>
 
-[![NPM](https://img.shields.io/npm/v/bear-jsutils.svg)](https://www.npmjs.com/package/bear-jsutils)
-[![npm](https://img.shields.io/npm/dm/bear-jsutils.svg)](https://www.npmjs.com/package/bear-jsutils)
+<div align="center">
+
+[![NPM](https://img.shields.io/npm/v/bear-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/bear-window-launcher)
+[![npm downloads](https://img.shields.io/npm/dm/bear-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/bear-window-launcher)
+[![npm](https://img.shields.io/npm/dt/bear-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/bear-window-launcher)
+[![npm](https://img.shields.io/npm/l/bear-window-launcher?style=for-the-badge)](https://github.com/imagine10255/bear-window-launcher/blob/main/LICENSE)
+
+</div>
 
 
-## Install
+## Features
+
+- Supports window.open after asynchronous requests in iOS Safari.
+- Supports whether to close the old window when opening a new one
+- Provides browser detection (Safari, Firefox, IE, Wechat, Line, Facebook), default is Chrome.
+
+## Installation
 
 ```bash
-yarn add bear-jsutils
+yarn add bear-window-launcher
 ```
 
-## Usage
+## Examples
 
+use in your page/component:
 ```tsx
-import {number} from 'bear-jsutils/format'
-import {formatCurrency} from 'bear-jsutils/number'
+import {Launcher} from 'bear-window-launcher';
 
+const launcher = new Launcher();
+
+// async requet
+const response = await fetch('/url1.json');
+const json = await response.json();
+
+launcher.open(json.data);
 ```
+
+There is also a codesandbox template that you can fork and play with it:
+
+[![Edit react-editext-template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/bear-window-launcher-lqsn6)
+
+Use Nextjs example
+
+
+[![Edit react-editext-template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/imagine10255/bear-window-launcher-nextjs/main)
+
+
 
 ## License
 
 MIT © [imagine10255](https://github.com/imagine10255)
+
