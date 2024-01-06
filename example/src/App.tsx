@@ -7,6 +7,19 @@ import Launcher from 'bear-window-launcher';
 import './App.css';
 import './bootstrap-base.min.css';
 
+const delay = (delayMs: number) => {
+    return new Promise(resolve => setTimeout(resolve, delayMs));
+};
+const asyncOpen = (url: string) => {
+    setTimeout(() => {
+        window.open(url);
+    }, 0);
+};
+
+type TWindowOpen = (url: string) => WindowProxy|null;
+
+
+
 
 const launcher = new Launcher();
 
@@ -23,17 +36,30 @@ function App() {
 
 
     const handleLauncherClick1 = async () => {
-        launcher.ready();
+        // launcher.ready();
+
         const response = await fetch('/url1.json');
+
         const json = await response.json();
         launcher.open(json.data);
+        // await delay(2000);
+
+        // window.requestAnimationFrame(() => {
+        // asyncOpen(json.data);
+        // });
+        // setTimeout(() => {
+
+        // },0);
+        // launcher.open(json.data);
     };
 
 
     const handleLauncherClick2 = async () => {
-        launcher.ready();
+        // launcher.ready();
         const response = await fetch('/url2.json');
         const json = await response.json();
+        // await delay(2000);
+
         launcher.open(json.data);
     };
 
@@ -58,12 +84,10 @@ function App() {
             </div>
             <h1>Vite + React</h1>
             <div className="card">
-                <div>
-                    {res}
+                <div className="mb-3">
+                    {launcher.name}
                 </div>
-                <div>
-                    {date}
-                </div>
+
 
                 <button onClick={handleLauncherClick1} type="button">
                     Launcher Open 1
