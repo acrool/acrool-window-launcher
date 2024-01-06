@@ -41,16 +41,6 @@ const json = await response.json();
 launcher.open(json.data);
 ```
 
-There is also a codesandbox template that you can fork and play with it:
-
-[![Edit react-editext-template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/bear-window-launcher-lqsn6)
-
-Use Nextjs example
-
-
-[![Edit react-editext-template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/imagine10255/bear-window-launcher-nextjs/main)
-
-
 
 ## License
 
