@@ -1,74 +1,40 @@
-import {ulid} from 'ulid';
-import {checkIsSafariBrowser} from './utils';
-import {IBrowser, Chrome, IOSSafari, OSXSafari} from './launchers';
-import {checkIsIOS} from 'bear-jsutils/browser';
+import {getBrowser, EBrowser, asyncOpen} from './utils';
+import {IOpenOption} from './types';
 
 
-const getBrowser = () => {
-    if(checkIsIOS() && checkIsSafariBrowser()) return IOSSafari;
-    if(checkIsSafariBrowser()) return OSXSafari;
-    // if(checkIsSafariBrowser()) return Firefox;
-    // if(checkIsSafariBrowser()) return AndroidWebview;
-    // if(checkIsSafariBrowser()) return IOSWebview;
-
-    return Chrome;
-};
-
-
-interface IOptions {
-    openMode?: TOpenMode
-    readyUrl?: string // 指定一個暫時開啟的頁面路徑，避免白頁
-    noticeCloseUrl?: string // 指定一個通知使用者手動關閉的頁面路徑，避免白頁
-}
-type TOpenMode = 'blank'|'multiple'|'self';
-
+/**
+ * 瀏覽器頁籤啟動器
+ */
 export default class Launcher {
-    _browser: IBrowser;
-    _prefixName?: string;
-    _openTargetId?: string;
-    _targetWindow: any;
-    // _readyUrl: string;
-    // _noticeCloseUrl: string;
+    _childWindow: WindowProxy|null = null;
 
-    // _childWindow: WindowProxy|null = null;
-
-    constructor(options?: IOptions) {
-        // this._openTargetId = this._createOpenTargetId();
-
-        const readyUrl = options?.readyUrl ?? 'about:blank';
-        const noticeCloseUrl = options?.noticeCloseUrl ?? 'about:blank';
-
-        this._browser = new (getBrowser())({readyUrl, noticeCloseUrl});
+    get name(): EBrowser{
+        return getBrowser();
     }
 
-
     /**
-     * 建立目標視窗ID
+     * 打開頁籤
      */
-    _createOpenTargetId(){
-        return ulid();
-    }
+    async open(url: string, option?: IOpenOption){
+        if(option?.isPreClose){
+            this.close();
+        }
+        if(option?.isTargetSelf){
+            window.location.href = url;
+        }else{
+            this._childWindow = await asyncOpen(url);
+        }
 
-
-    get name(){
-        return this._browser.name;
-    }
-
-
-
-    /**
-     * 打開
-     */
-    open(url: string){
-        this._browser
-            .close()
-            .open(url);
+        return this;
     }
 
     /**
-     * 關閉
+     * 關閉頁籤
      */
     close(){
-        this._browser.close();
+        if(this._childWindow && !this._childWindow.closed){
+            this._childWindow.close();
+        }
+        return this;
     }
 }
