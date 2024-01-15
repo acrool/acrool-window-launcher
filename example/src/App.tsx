@@ -2,7 +2,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import {pull} from 'bear-jsutils/array';
 import {simpleDate} from 'bear-jsutils/date';
-import Launcher from 'bear-window-launcher';
+import {Launcher} from 'bear-window-launcher';
 
 import './App.css';
 import './bootstrap-base.min.css';
