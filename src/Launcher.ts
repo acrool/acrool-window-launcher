@@ -1,5 +1,5 @@
-import {getBrowser, EBrowser, asyncOpen} from './utils';
-import {IOpenOption} from './types';
+import {getBrowser, EBrowser} from './utils';
+import {IOpenOption, ILauncherOption} from './types';
 
 
 /**
@@ -7,26 +7,53 @@ import {IOpenOption} from './types';
  */
 export default class Launcher {
     _childWindow: WindowProxy|null = null;
+    _readyUrl: string;
+    _isPreClose: boolean;
 
     get name(): EBrowser{
         return getBrowser();
     }
 
+    constructor(option?: ILauncherOption) {
+        this._readyUrl = option?.readyUrl ?? 'about:blank';
+        this._isPreClose = option?.isPreClose ?? false;
+    }
+
     /**
-     * 打開頁籤
+     * 頁籤準備打開
      */
-    async open(url: string, option?: IOpenOption){
-        if(option?.isPreClose){
+    ready(){
+        if(this._isPreClose){
             this.close();
         }
-        if(option?.isTargetSelf){
-            window.location.href = url;
-        }else{
-            this._childWindow = await asyncOpen(url);
+        if([EBrowser.IOS_Safari, EBrowser.OSX_Safari].includes(this.name)){
+            this._childWindow = window.open(this._readyUrl);
         }
 
         return this;
     }
+
+    /**
+     * 打開頁籤
+     */
+    open(url: string, option?: IOpenOption){
+
+        if(option?.isTargetSelf){
+            window.location.href = url;
+
+        }else if(this._childWindow && [EBrowser.IOS_Safari, EBrowser.OSX_Safari].includes(this.name)) {
+            this._childWindow.location.href = url;
+
+        }else{
+            this._childWindow = window.open(url);
+
+        }
+
+        return this;
+    }
+
+
+
 
     /**
      * 關閉頁籤

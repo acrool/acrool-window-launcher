@@ -32,7 +32,12 @@ use in your page/component:
 ```tsx
 import {Launcher} from 'bear-window-launcher';
 
-const launcher = new Launcher();
+const launcher = new Launcher({
+    readyUrl: '/ready_page'
+});
+
+// Ready support safari
+launcher.ready();
 
 // async requet
 const response = await fetch('/url1.json');

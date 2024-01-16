@@ -12,11 +12,13 @@
     "dayjs": "1.x"
   },
   "dependencies": {
-    "bear-window-launcher": "link:..",
+    "axios": "^1.6.5",
     "bear-jsutils": "^3.1.9",
+    "bear-window-launcher": "link:..",
+    "dayjs": "^1.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "dayjs": "^1.11.10"
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

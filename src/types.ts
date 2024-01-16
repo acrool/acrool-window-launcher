@@ -1,5 +1,11 @@
 
 export interface IOpenOption {
-    isPreClose: boolean,
-    isTargetSelf: boolean
+    isTargetSelf?: boolean
 }
+
+
+export interface ILauncherOption {
+    readyUrl?: string
+    isPreClose?: boolean
+}
+
