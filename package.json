@@ -37,12 +37,11 @@
     "test": "jest",
     "gitlog": "git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cblueby %an %Cgreen(%cr)%Creset'",
     "release-cli": "standard-version --packageFiles ./src/package.json --bumpFiles ./src/package.json",
-    "release": "yarn release-cli --release-as",
-    "release:major": "yarn release-cli -r major && run-s postrelease",
-    "release:minor": "yarn release-cli -r minor && run-s postrelease",
-    "release:patch": "yarn release-cli -r patch && run-s postrelease",
-    "release:alpha": "yarn release-cli --prerelease alpha && run-s postrelease",
-    "postrelease": "# then run `git push --follow-tags origin main && yarn build && npm publish --access=public` to publish"
+    "release": "standard-version --release-as",
+    "release:major": "standard-version -r major",
+    "release:minor": "standard-version -r minor",
+    "release:patch": "standard-version -r patch",
+    "release:alpha": "standard-version --prerelease alpha"
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
