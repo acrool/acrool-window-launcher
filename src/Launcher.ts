@@ -1,5 +1,5 @@
 import {getBrowser, EBrowser, checkIsWebview} from './utils';
-import {ILauncherOption} from './types';
+import {ILauncherOption, IOpenOption} from './types';
 
 
 /**
@@ -38,9 +38,9 @@ export default class Launcher {
     /**
      * 打開頁籤
      */
-    open(url: string){
+    open(url: string, isTargetSelf?: false){
 
-        if(this._isTargetSelf) {
+        if(isTargetSelf || this._isTargetSelf ) {
             window.open(url, '_self');
 
         }else if(this._childWindow && [EBrowser.Safari].includes(this.name)) {
