@@ -1,5 +1,5 @@
-import {getBrowser, EBrowser} from './utils';
-import {IOpenOption, ILauncherOption} from './types';
+import {getBrowser, EBrowser, checkIsWebview} from './utils';
+import {ILauncherOption} from './types';
 
 
 /**
@@ -9,6 +9,7 @@ export default class Launcher {
     _childWindow: WindowProxy|null = null;
     _readyUrl: string;
     _isPreClose: boolean;
+    _isTargetSelf: boolean;
 
     get name(): EBrowser{
         return getBrowser();
@@ -17,6 +18,7 @@ export default class Launcher {
     constructor(option?: ILauncherOption) {
         this._readyUrl = option?.readyUrl ?? 'about:blank';
         this._isPreClose = option?.isPreClose ?? false;
+        this._isTargetSelf = option?.isTargetSelf ?? false;
     }
 
     /**
@@ -26,7 +28,7 @@ export default class Launcher {
         if(this._isPreClose){
             this.close();
         }
-        if([EBrowser.IOS_Safari, EBrowser.OSX_Safari].includes(this.name)){
+        if(!this._isTargetSelf && [EBrowser.Safari].includes(this.name)){
             this._childWindow = window.open(this._readyUrl);
         }
 
@@ -36,12 +38,12 @@ export default class Launcher {
     /**
      * 打開頁籤
      */
-    open(url: string, option?: IOpenOption){
+    open(url: string){
 
-        if(option?.isTargetSelf){
-            window.location.href = url;
+        if(this._isTargetSelf) {
+            window.open(url, '_self');
 
-        }else if(this._childWindow && [EBrowser.IOS_Safari, EBrowser.OSX_Safari].includes(this.name)) {
+        }else if(this._childWindow && [EBrowser.Safari].includes(this.name)) {
             this._childWindow.location.href = url;
 
         }else{

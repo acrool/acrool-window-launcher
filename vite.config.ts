@@ -20,6 +20,11 @@ export default defineConfig(({mode}) => {
             visualizer() as Plugin,
         ],
         build: {
+            rollupOptions: {
+                output: {
+                    exports: 'named',
+                },
+            },
             sourcemap: isDev,
             outDir: 'dist',
             lib: {

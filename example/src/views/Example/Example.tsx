@@ -1,12 +1,15 @@
-import Launcher from 'bear-window-launcher';
+import Launcher, {getBrowser} from 'bear-window-launcher';
+import {useRef} from 'react';
 
 
 const launcher = new Launcher({
     readyUrl: '/url1.json',
     isPreClose: true,
+    isTargetSelf: true,
 });
 
 const Example = () => {
+    const logRef = useRef<HTMLDivElement>(null);
 
     const handleLauncherClose = async () => {
         launcher.close();
@@ -14,38 +17,55 @@ const Example = () => {
 
 
     const handleLauncherClick2 = async () => {
-        launcher.ready();
+        if(logRef && logRef.current){
 
-        const response = await fetch('/url1.json', {method: 'POST'});
-        const json = await response.json();
+            logRef.current.innerHTML = 'ready...';
+            launcher.ready();
+            // open('https://www.google.com');
 
-        const con = document.getElementById('console');
-        if(con){
-            con.innerHTML = json.data;
+            // @ts-ignore
+            // window.open.postMessage('https://www.google.com');
+
+
+            logRef.current.innerHTML = 'fetching...';
+
+            // const testApiUrl1 = 'http://yapi.5881689.com:1000/mock/17/api5-member/api/lobby/lobbyStart';
+            // const response = await fetch(testApiUrl1, {method: 'POST'});
+
+            const testApiUrl2 = '/url1.json';
+            const response = await fetch(testApiUrl2, {method: 'GET'});
+            const json = await response.json();
+
+            const targetUrl = json.data.lobbyUrl;
+            logRef.current.innerHTML = `open url: ${targetUrl}`;
+
+            launcher.open(targetUrl);
+
+            logRef.current.append(' [done]');
+
         }
-
-        launcher.open(json.data);
-
     };
 
 
-    return <>
-        <button onClick={handleLauncherClick2} type="button">
-            Launcher Open 2
-        </button>
+    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center'}}>
+        <div>Current Browser: {getBrowser()}</div>
+        <div>navigator.userAgent: <p>{navigator.userAgent}</p></div>
 
-        <br/>
-        <br/>
+        <div>
+            <button onClick={handleLauncherClick2} type="button">
+                Launcher Open 2
+            </button>
+        </div>
 
-        <div id="console">
-            is url test
+        <div ref={logRef}>
+
         </div>
 
         <button onClick={handleLauncherClose} type="button">
             Close
         </button>
 
-    </>;
+    </div>;
 };
 
 export default Example;
