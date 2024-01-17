@@ -38,7 +38,7 @@ export default class Launcher {
     /**
      * 打開頁籤
      */
-    open(url: string, isTargetSelf?: false){
+    open(url: string, isTargetSelf?: boolean){
 
         if(isTargetSelf || this._isTargetSelf ) {
             window.open(url, '_self');
