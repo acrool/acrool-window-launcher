@@ -1,5 +1,5 @@
 import {getBrowser, EBrowser, checkIsWebview} from './utils';
-import {ILauncherOption, IOpenOption} from './types';
+import {ILauncherOption} from './types';
 
 
 /**
