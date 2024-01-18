@@ -1,6 +1,6 @@
 {
   "name": "bear-window-launcher",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "This is a window launcher for front-end compatibility with browser issues when using window.open.",
   "keywords": [
     "typescript",
