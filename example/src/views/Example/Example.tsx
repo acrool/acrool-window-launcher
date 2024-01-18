@@ -117,6 +117,7 @@ const Example = () => {
 
 
     return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
+        <div ref={logRef}/>
 
         <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
             <Button type="button" onClick={handleLauncher} >Launcher Open</Button>
@@ -132,7 +133,6 @@ const Example = () => {
         </div>
 
 
-        <div ref={logRef}/>
 
 
 
