@@ -1,39 +1,45 @@
-import Launcher, {getBrowser} from 'bear-window-launcher';
+import Launcher, {
+    getBrowser,
+    checkIsMobile,
+    checkIsChromeBrowser,
+    checkIsAndroid,
+    checkIsIOS,
+    checkIsSafariBrowser,
+    checkIsFirefoxBrowser,
+    checkIsEdgeBrowser,
+    checkIsLineBrowser,
+    checkIsFacebookBrowser, checkIsWebview, checkIsPWA
+} from 'bear-window-launcher';
+import {objectKeys} from 'bear-jsutils/object';
 import {useRef} from 'react';
+import {Table} from 'bear-react-table';
+import styled from 'styled-components';
 
 
 const launcher = new Launcher({
     readyUrl: '/url1.json',
     isPreClose: true,
-    isTargetSelf: true,
+    isTargetSelf: false,
 });
 
 const Example = () => {
     const logRef = useRef<HTMLDivElement>(null);
 
-    const handleLauncherClose = async () => {
+    const handleClose = async () => {
         launcher.close();
     };
 
 
-    const handleLauncherClick2 = async () => {
+    const handleLauncher = async () => {
         if(logRef && logRef.current){
 
             logRef.current.innerHTML = 'ready...';
             launcher.ready();
-            // open('https://www.google.com');
-
-            // @ts-ignore
-            // window.open.postMessage('https://www.google.com');
-
 
             logRef.current.innerHTML = 'fetching...';
 
-            // const testApiUrl1 = 'http://yapi.5881689.com:1000/mock/17/api5-member/api/lobby/lobbyStart';
-            // const response = await fetch(testApiUrl1, {method: 'POST'});
-
-            const testApiUrl2 = '/url1.json';
-            const response = await fetch(testApiUrl2, {method: 'GET'});
+            const testApiUrl = '/url1.json';
+            const response = await fetch(testApiUrl, {method: 'GET'});
             const json = await response.json();
 
             const targetUrl = json.data.lobbyUrl;
@@ -47,23 +53,92 @@ const Example = () => {
     };
 
 
-    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center'}}>
-        <div>Current Browser: {getBrowser()}</div>
-        <div>navigator.userAgent: <p>{navigator.userAgent}</p></div>
+    const os = {
+        Android: checkIsAndroid(),
+        iOS: checkIsIOS(),
+        Mobile: checkIsMobile(),
+    };
+    const browser = {
+        Android: checkIsAndroid(),
+        Ios: checkIsIOS(),
+        Chrome: checkIsChromeBrowser(),
+        Safari: checkIsSafariBrowser(),
+        Firefox: checkIsFirefoxBrowser(),
+        Edge: checkIsEdgeBrowser(),
+        Line: checkIsLineBrowser(),
+        Facebook: checkIsFacebookBrowser(),
+        Webview: checkIsWebview(),
+        Pwa: checkIsPWA(),
+    };
 
-        <div>
-            <button onClick={handleLauncherClick2} type="button">
-                Launcher Open 2
+
+    const renderBrowserTable = () => {
+
+        return <Table
+            isDark
+            isVisiblePaginate={false}
+            gap="10px"
+            title={{
+                deviceName:   {text: 'Device',      col: 100},
+                check:     {text: 'Check',   col: 'auto'},
+            }}
+            data={objectKeys(browser).map(key => {
+                return {
+                    id: 1,
+                    field: {
+                        deviceName: key.toString(),
+                        check: browser[key] ? <Label>True</Label>: false,
+                    },
+                };
+            })}
+        />;
+    };
+
+
+    const renderDeviceTable = () => {
+
+        return <Table
+            isDark
+            isVisiblePaginate={false}
+            gap="10px"
+            title={{
+                deviceName:   {text: 'Device',      col: 100},
+                check:     {text: 'Check',   col: 'auto'},
+            }}
+            data={objectKeys(os).map(key => {
+                return {
+                    id: 1,
+                    field: {
+                        deviceName: key.toString(),
+                        check: os[key] ? <Label>True</Label>: false,
+                    },
+                };
+            })}
+        />;
+    };
+
+
+    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start'}}>
+
+        <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+            <button onClick={handleLauncher} type="button">Launcher Open</button>
+            <button onClick={handleClose} type="button">
+                Close
             </button>
         </div>
 
-        <div ref={logRef}>
+        <div>Current Browser: <Label>{getBrowser()}</Label></div>
+        <div>[userAgent] {navigator.userAgent}</div>
 
+        <div style={{display: 'flex', gap: '15px', width: '100%'}}>
+            {renderDeviceTable()}
+            {renderBrowserTable()}
         </div>
 
-        <button onClick={handleLauncherClose} type="button">
-            Close
-        </button>
+
+        <div ref={logRef}/>
+
+
 
     </div>;
 };
@@ -72,3 +147,11 @@ export default Example;
 
 
 
+
+
+const Label = styled.label`
+  background-color: #dc457a;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 4px;
+`;

@@ -46,6 +46,32 @@ const json = await response.json();
 launcher.open(json.data);
 ```
 
+## Check Browser
+
+```bash
+import Launcher, {
+    checkIsMobile,
+    checkIsAndroid,
+    checkIsIOS,
+    getBrowser,
+    checkIsChromeBrowser,
+    checkIsSafariBrowser,
+    checkIsFirefoxBrowser,
+    checkIsEdgeBrowser,
+    checkIsLineBrowser,
+    checkIsFacebookBrowser, checkIsWebview, checkIsPWA
+} from 'bear-window-launcher';
+```
+
+## Check OS
+
+```bash
+import Launcher, {
+    checkIsMobile,
+    checkIsAndroid,
+    checkIsIOS,
+} from 'bear-window-launcher';
+```
 
 ## License
 
