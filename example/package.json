@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "pages:dev": "wrangler pages dev --proxy 3000 -- yarn dev",
     "pages:deploy": "NODE_VERSION=18 yarn run build && wrangler pages deploy ./dist"
