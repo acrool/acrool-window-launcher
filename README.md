@@ -36,7 +36,8 @@ const launcher = new Launcher({
     readyUrl: '/ready_page'
 });
 
-// Ready support safari
+// This is to support safari, so it must be
+// Safari needs to pre-open tabs before requesting, other browsers do not need to
 launcher.ready();
 
 // async requet

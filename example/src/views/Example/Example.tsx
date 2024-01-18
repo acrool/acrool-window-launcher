@@ -87,7 +87,7 @@ const Example = () => {
                     id: 1,
                     field: {
                         deviceName: key.toString(),
-                        check: browser[key] ? <Label>True</Label>: false,
+                        check: browser[key] ? <Label>Yes</Label>: 'No',
                     },
                 };
             })}
@@ -102,7 +102,7 @@ const Example = () => {
             isVisiblePaginate={false}
             gap="10px"
             title={{
-                deviceName:   {text: 'Device',      col: 100},
+                deviceName:   {text: 'Device',      col: 'auto'},
                 check:     {text: 'Check',   col: 'auto'},
             }}
             data={objectKeys(os).map(key => {
@@ -110,7 +110,7 @@ const Example = () => {
                     id: 1,
                     field: {
                         deviceName: key.toString(),
-                        check: os[key] ? <Label>True</Label>: false,
+                        check: os[key] ? <Label>Yes</Label>: 'No',
                     },
                 };
             })}
@@ -118,7 +118,7 @@ const Example = () => {
     };
 
 
-    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start'}}>
+    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
 
         <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
             <button onClick={handleLauncher} type="button">Launcher Open</button>
@@ -154,4 +154,7 @@ const Label = styled.label`
   color: #fff;
   padding: 2px 5px;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -24,7 +24,7 @@ function App() {
                     </a>
                 </div>
                 <h1>Vite + React</h1>
-                <div className="card">
+                <div className="">
                     <Example/>
                 </div>
 
