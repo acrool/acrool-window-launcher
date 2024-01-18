@@ -15,11 +15,17 @@ export default class Launcher {
         return getBrowser();
     }
 
+    get isUseReadyMode(): boolean{
+        return [EBrowser.Safari, EBrowser.Firefox].includes(this.name);
+    }
+
     constructor(option?: ILauncherOption) {
         this._readyUrl = option?.readyUrl ?? 'about:blank';
         this._isPreClose = option?.isPreClose ?? false;
         this._isTargetSelf = option?.isTargetSelf ?? false;
     }
+
+
 
     /**
      * 頁籤準備打開
@@ -28,7 +34,7 @@ export default class Launcher {
         if(this._isPreClose){
             this.close();
         }
-        if(!this._isTargetSelf && [EBrowser.Safari].includes(this.name)){
+        if(!this._isTargetSelf && this.isUseReadyMode){
             this._childWindow = window.open(this._readyUrl);
         }
 
@@ -43,7 +49,7 @@ export default class Launcher {
         if(isTargetSelf || this._isTargetSelf ) {
             window.open(url, '_self');
 
-        }else if(this._childWindow && [EBrowser.Safari].includes(this.name)) {
+        }else if(this._childWindow && this.isUseReadyMode) {
             this._childWindow.location.href = url;
 
         }else{
