@@ -25,7 +25,7 @@ const launcher = new Launcher({
 const Example = () => {
     const logRef = useRef<HTMLDivElement>(null);
 
-    const handleClose = async () => {
+    const handleClose = () => {
         launcher.close();
     };
 
@@ -59,8 +59,6 @@ const Example = () => {
         Mobile: checkIsMobile(),
     };
     const browser = {
-        Android: checkIsAndroid(),
-        Ios: checkIsIOS(),
         Chrome: checkIsChromeBrowser(),
         Safari: checkIsSafariBrowser(),
         Firefox: checkIsFirefoxBrowser(),
@@ -84,7 +82,7 @@ const Example = () => {
             }}
             data={objectKeys(browser).map(key => {
                 return {
-                    id: 1,
+                    id: key,
                     field: {
                         deviceName: key.toString(),
                         check: browser[key] ? <Label>Yes</Label>: 'No',
@@ -107,7 +105,7 @@ const Example = () => {
             }}
             data={objectKeys(os).map(key => {
                 return {
-                    id: 1,
+                    id: key,
                     field: {
                         deviceName: key.toString(),
                         check: os[key] ? <Label>Yes</Label>: 'No',
@@ -120,11 +118,9 @@ const Example = () => {
 
     return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
 
-        <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
-            <button onClick={handleLauncher} type="button">Launcher Open</button>
-            <button onClick={handleClose} type="button">
-                Close
-            </button>
+        <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
+            <Button type="button" onClick={handleLauncher} >Launcher Open</Button>
+            <CloseButton type="button" onClick={handleClose}>Close</CloseButton>
         </div>
 
         <div>Current Browser: <Label>{getBrowser()}</Label></div>
@@ -146,7 +142,14 @@ const Example = () => {
 export default Example;
 
 
-
+const Button = styled.button`
+  background-color: #2c32a9;
+  color: #fff;
+`;
+const CloseButton = styled.button`
+  background-color: #3b3939;
+  color: #fff;
+`;
 
 
 const Label = styled.label`

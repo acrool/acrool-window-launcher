@@ -128,6 +128,9 @@ export function checkIsSafariBrowser(): boolean {
     if(checkIsChromeBrowser()){
         return false;
     }
+    if(checkIsFirefoxBrowser()){
+        return false;
+    }
     return /safari/.test(ua);
 }
 
