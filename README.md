@@ -49,7 +49,7 @@ launcher.open(json.data);
 
 ## Check Browser
 
-```bash
+```ts
 import Launcher, {
     checkIsMobile,
     checkIsAndroid,
@@ -66,7 +66,7 @@ import Launcher, {
 
 ## Check OS
 
-```bash
+```ts
 import Launcher, {
     checkIsMobile,
     checkIsAndroid,
