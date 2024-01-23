@@ -16,7 +16,7 @@ export default class Launcher {
     }
 
     get isUseReadyMode(): boolean{
-        return [EBrowser.Safari, EBrowser.Firefox].includes(this.name);
+        return this.name !== EBrowser.Webview;
     }
 
     constructor(option?: ILauncherOption) {
