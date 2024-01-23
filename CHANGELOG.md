@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.11](https://github.com/imagine10255/bear-window-launcher/compare/v1.0.10...v1.0.11) (2024-01-23)
+
+
+### Bug Fixes
+
+* ready is only enabled when it is not webview ([1bd6eba](https://github.com/imagine10255/bear-window-launcher/commit/1bd6ebaf752cff3703a7b39c7dd7366c8ab06901))
+
 ### [1.0.10](https://github.com/imagine10255/bear-window-launcher/compare/v1.0.9...v1.0.10) (2024-01-18)
 
 ### [1.0.9](https://github.com/imagine10255/bear-window-launcher/compare/v1.0.8...v1.0.9) (2024-01-18)
