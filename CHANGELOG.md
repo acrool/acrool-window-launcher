@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.12](https://github.com/imagine10255/bear-window-launcher/compare/v1.0.11...v1.0.12) (2024-01-24)
+
+
+### Features
+
+* modify not ready, same open window new tab ([7504c1c](https://github.com/imagine10255/bear-window-launcher/commit/7504c1c15facc0e21248bda4777d442158722889))
+
 ### [1.0.11](https://github.com/imagine10255/bear-window-launcher/compare/v1.0.10...v1.0.11) (2024-01-23)
 
 
