@@ -31,9 +31,14 @@ export default class Launcher {
      * 頁籤準備打開
      */
     ready(isPreClose?: boolean){
-        if(isPreClose || this._isPreClose){
+        if(typeof isPreClose !== 'undefined' && isPreClose) {
+            this.close();
+
+        }else if(this._isPreClose){
             this.close();
         }
+
+
         if(this._isTargetSelf) {
             return this;
         }
@@ -49,7 +54,10 @@ export default class Launcher {
      */
     open(url: string, isTargetSelf?: boolean){
 
-        if(isTargetSelf || this._isTargetSelf ) {
+        if(typeof isTargetSelf !== 'undefined' && isTargetSelf){
+            window.open(url, '_self');
+
+        }else if(this._isTargetSelf){
             window.open(url, '_self');
 
         }else if(this._childWindow?.window && this.isUseReadyMode) {
