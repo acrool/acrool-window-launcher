@@ -1,4 +1,4 @@
-import {getBrowser, EBrowser, checkIsWebview} from './utils';
+import {getBrowser, EBrowser} from './utils';
 import {ILauncherOption} from './types';
 
 
@@ -53,7 +53,7 @@ export default class Launcher {
             this._childWindow.location.href = url;
 
         }else{
-            this._childWindow = window.open(url);
+            window.open(url);
 
         }
 
