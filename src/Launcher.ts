@@ -30,11 +30,14 @@ export default class Launcher {
     /**
      * 頁籤準備打開
      */
-    ready(){
-        if(this._isPreClose){
+    ready(isPreClose?: boolean){
+        if(isPreClose || this._isPreClose){
             this.close();
         }
-        if(!this._isTargetSelf && this.isUseReadyMode){
+        if(this._isTargetSelf) {
+            return this;
+        }
+        if(this.isUseReadyMode) {
             this._childWindow = window.open(this._readyUrl);
         }
 
@@ -49,11 +52,12 @@ export default class Launcher {
         if(isTargetSelf || this._isTargetSelf ) {
             window.open(url, '_self');
 
-        }else if(this._childWindow && this.isUseReadyMode) {
+        }else if(this._childWindow?.window && this.isUseReadyMode) {
+            this._childWindow.focus();
             this._childWindow.location.href = url;
 
         }else{
-            window.open(url);
+            this._childWindow = window.open(url);
 
         }
 
