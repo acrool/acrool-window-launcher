@@ -18,9 +18,13 @@ import styled from 'styled-components';
 
 const launcher = new Launcher({
     readyUrl: '/url1.json',
-    isPreClose: true,
-    isTargetSelf: false,
+    isPreClose: false,
 });
+
+
+function delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const Example = () => {
     const logRef = useRef<HTMLDivElement>(null);
@@ -39,7 +43,10 @@ const Example = () => {
             logRef.current.innerHTML = 'fetching...';
 
             const testApiUrl = '/url1.json';
-            const response = await fetch(testApiUrl, {method: 'GET'});
+            const [response] = await Promise.all([
+                fetch(testApiUrl, {method: 'GET'}),
+                delay(1500),
+            ]);
             const json = await response.json();
 
             const targetUrl = json.data.lobbyUrl;
