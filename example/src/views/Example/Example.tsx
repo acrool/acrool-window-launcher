@@ -17,7 +17,7 @@ import styled from 'styled-components';
 
 
 const launcher = new Launcher({
-    readyUrl: '/url1.json',
+    readyUrl: `${window.location.origin}/url1.json`,
     isPreClose: false,
 });
 
