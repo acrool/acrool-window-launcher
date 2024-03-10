@@ -160,7 +160,11 @@ export function checkIsChromeBrowser() {
  * 判斷是否為PWA模式
  */
 export function checkIsPWA(): boolean {
-    return ('standalone' in window.navigator) && (window.navigator.standalone as boolean);
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true;
+    }
+
+    return false;
 }
 
 

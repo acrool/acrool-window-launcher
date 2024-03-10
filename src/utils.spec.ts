@@ -312,22 +312,41 @@ describe('utils', () => {
     describe('checkIsPWA', () => {
         afterEach(() => {
             // @ts-ignore
-            delete window.navigator.standalone;
+            delete window.matchMedia.standalone;
         });
 
         it('should return true when running in PWA mode', () => {
             // 模擬 PWA 模式
-            Object.defineProperty(window.navigator, 'standalone', {
-                value: true,
-                configurable: true
+            Object.defineProperty(window, 'matchMedia', {
+                writable: true,
+                value: jest.fn().mockImplementation(query => ({
+                    matches: true,
+                    media: query,
+                    onchange: null,
+                    addListener: jest.fn(), // Deprecated
+                    removeListener: jest.fn(), // Deprecated
+                    addEventListener: jest.fn(),
+                    removeEventListener: jest.fn(),
+                    dispatchEvent: jest.fn(),
+                })),
             });
-
             expect(utils.checkIsPWA()).toBeTruthy();
         });
 
         it('should return false when not running in PWA mode', () => {
-            // 確保在非 PWA 模式下，standalone 屬性不存在
-            expect('standalone' in window.navigator).toBeFalsy();
+            Object.defineProperty(window, 'matchMedia', {
+                writable: true,
+                value: jest.fn().mockImplementation(query => ({
+                    matches: false,
+                    media: query,
+                    onchange: null,
+                    addListener: jest.fn(), // Deprecated
+                    removeListener: jest.fn(), // Deprecated
+                    addEventListener: jest.fn(),
+                    removeEventListener: jest.fn(),
+                    dispatchEvent: jest.fn(),
+                })),
+            });
             expect(utils.checkIsPWA()).toBeFalsy();
         });
     });
