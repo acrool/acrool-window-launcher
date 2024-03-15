@@ -6,6 +6,7 @@
     "typescript",
     "js-window-open"
   ],
+  "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   "exports": {
     ".": {
       "browser": "./dist/bear-window-launcher.es.js",
-      "import": "./dist/bear-dinwo-launcher.es.js"
+      "import": "./dist/bear-window-launcher.es.js"
     }
   },
   "files": [

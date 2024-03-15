@@ -33,5 +33,5 @@ export default defineConfig(({mode}) => {
                 fileName: (format,entryName) => `bear-window-launcher.${format}.js`,
             }
         },
-    }
+    };
 });
