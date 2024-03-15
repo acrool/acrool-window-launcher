@@ -20,12 +20,12 @@ export default defineConfig(({mode}) => {
             visualizer() as Plugin,
         ],
         build: {
+            sourcemap: isDev,
             rollupOptions: {
                 output: {
                     exports: 'named',
                 },
             },
-            sourcemap: isDev,
             outDir: 'dist',
             lib: {
                 entry: path.resolve(__dirname, 'src/index.ts'),

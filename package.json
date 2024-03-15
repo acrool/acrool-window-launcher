@@ -6,7 +6,6 @@
     "typescript",
     "js-window-open"
   ],
-  "type": "module",
   "license": "MIT",
   "repository": {
     "type": "git",
