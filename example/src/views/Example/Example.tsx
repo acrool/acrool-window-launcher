@@ -9,10 +9,10 @@ import Launcher, {
     checkIsEdgeBrowser,
     checkIsLineBrowser,
     checkIsFacebookBrowser, checkIsWebview, checkIsPWA
-} from 'bear-window-launcher';
+} from '@acrool/window-launcher';
 import {objectKeys} from 'bear-jsutils/object';
 import {useRef} from 'react';
-import {Table} from 'bear-react-table';
+import {Table} from '@acrool/react-table';
 import styled from 'styled-components';
 
 

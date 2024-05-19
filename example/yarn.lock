@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@acrool/react-table@4.3.8-alpha.2":
+  version "4.3.13-alpha.6"
+  resolved "https://registry.yarnpkg.com/@acrool/react-table/-/react-table-4.3.13-alpha.6.tgz#b81ee5ec617884c6c6c24b6a59aaa1449c0ac3a3"
+  integrity sha512-QHC9qaEAD6qqeSVse9BxUoRJUvsds7vmd8gS2p1Iq4vo2EwUKiR5QHXJSjwmXHcHhvlMBuIcMcIV+mu3d/ti8Q==
+
+"@acrool/window-launcher@link:..":
+  version "0.0.0"
+  uid ""
+
 "@babel/code-frame@^7.22.13", "@babel/code-frame@^7.23.5":
   version "7.23.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.23.5.tgz#9009b69a8c602293476ad598ff53e4562e15c244"
@@ -722,11 +731,6 @@
     "@types/react" "*"
     csstype "^3.0.2"
 
-"@types/throttle-debounce@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-5.0.2.tgz#3489d91673a4be830c2c9e2acf1f6cdab724102c"
-  integrity sha512-pDzSNulqooSKvSNcksnV72nk8p7gRqN8As71Sp28nov1IgmPKWbOEIwAWvBME5pPTtaXJAvG3O4oc76HlQ4kqQ==
-
 "@vitejs/plugin-react-swc@^3.0.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react-swc/-/plugin-react-swc-3.5.0.tgz#1fadff5148003e8091168c431e44c850f9a39e74"
@@ -795,19 +799,6 @@ bear-jsutils@3.2.0-alpha.4:
   version "3.2.0-alpha.4"
   resolved "https://registry.yarnpkg.com/bear-jsutils/-/bear-jsutils-3.2.0-alpha.4.tgz#be82b07476c616e62741ceecd4cdbd5701cf309a"
   integrity sha512-p/sP9WjYXh+HPaUI4XomKmNyF6x9USoLzCAJvIu6w+xRo6aM/sJxio+95EsaKGVhCE8OSfS9Kj+IRt+fLmXZAQ==
-
-bear-react-table@4.3.8-alpha.2:
-  version "4.3.8-alpha.2"
-  resolved "https://registry.yarnpkg.com/bear-react-table/-/bear-react-table-4.3.8-alpha.2.tgz#954a0d996e59ebdfca1672d22043f2f8db737c88"
-  integrity sha512-JFf+JUJ3NRXg6Dr+9tsPZDArcihPCUojWqgvCIuZlVmvfBqs7eZ31KSI8sSoCovgiwxL4/giiQls6BZkmxUiTw==
-  dependencies:
-    "@types/throttle-debounce" "^5.0.2"
-    react "^18.x"
-    react-dom "^18.x"
-
-"bear-window-launcher@link:..":
-  version "0.0.0"
-  uid ""
 
 before-after-hook@^2.2.0:
   version "2.2.3"
@@ -1272,7 +1263,7 @@ proxy-from-env@^1.1.0:
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
   integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
-react-dom@^18.2.0, react-dom@^18.x:
+react-dom@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -1285,7 +1276,7 @@ react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react@^18.2.0, react@^18.x:
+react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==

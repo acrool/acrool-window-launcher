@@ -30,7 +30,7 @@ export default defineConfig(({mode}) => {
             lib: {
                 entry: path.resolve(__dirname, 'src/index.ts'),
                 formats: ['es', 'cjs'],
-                fileName: (format,entryName) => `bear-window-launcher.${format}.js`,
+                fileName: (format,entryName) => `acrool-window-launcher.${format}.js`,
             }
         },
     };

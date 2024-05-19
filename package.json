@@ -1,5 +1,5 @@
 {
-  "name": "bear-window-launcher",
+  "name": "@acrool/window-launcher",
   "version": "1.0.17",
   "description": "This is a window launcher for front-end compatibility with browser issues when using window.open.",
   "keywords": [
@@ -10,17 +10,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/imagine10255/bear-window-launcher.git"
+    "url": "https://github.com/imagine10255/acrool-window-launcher.git"
   },
   "engines": {
     "node": ">=14"
   },
-  "module": "./dist/bear-window-launcher.es.js",
+  "module": "./dist/acrool-window-launcher.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "browser": "./dist/bear-window-launcher.es.js",
-      "import": "./dist/bear-window-launcher.es.js"
+      "browser": "./dist/acrool-window-launcher.es.js",
+      "import": "./dist/acrool-window-launcher.es.js"
     }
   },
   "files": [
