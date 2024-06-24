@@ -1,5 +1,5 @@
 import './App.css';
-import Example from './views/Example/Example';
+import Example from './views/Example';
 import Github from './assets/github.svg?react';
 
 
@@ -15,9 +15,8 @@ function App() {
             </a>
 
             <h1>Acrool Window Launcher</h1>
-            <div className="">
-                <Example/>
-            </div>
+
+            <Example/>
 
         </div>
     );
