@@ -1,4 +1,4 @@
-# Bear Window Launcher
+# Acrool Window Launcher
 
 <p align="center">
     This is a window launcher for front-end compatibility with browser issues when using window.open.
@@ -6,10 +6,14 @@
 
 <div align="center">
 
-[![NPM](https://img.shields.io/npm/v/acrool-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/acrool-window-launcher)
-[![npm downloads](https://img.shields.io/npm/dm/acrool-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/acrool-window-launcher)
-[![npm](https://img.shields.io/npm/dt/acrool-window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/acrool-window-launcher)
-[![npm](https://img.shields.io/npm/l/acrool-window-launcher?style=for-the-badge)](https://github.com/@acrool/acrool-window-launcher/blob/main/LICENSE)
+
+[![NPM](https://img.shields.io/npm/v/@acrool/window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/@acrool/window-launcher)
+[![npm](https://img.shields.io/bundlejs/size/@acrool/window-launcher?style=for-the-badge)](https://github.com/acrool/@acrool/window-launcher/blob/main/LICENSE)
+[![npm](https://img.shields.io/npm/l/@acrool/window-launcher?style=for-the-badge)](https://github.com/acrool/window-launcher/blob/main/LICENSE)
+
+[![npm downloads](https://img.shields.io/npm/dm/@acrool/window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/@acrool/window-launcher)
+[![npm](https://img.shields.io/npm/dt/@acrool/window-launcher.svg?style=for-the-badge)](https://www.npmjs.com/package/@acrool/window-launcher)
+
 
 </div>
 

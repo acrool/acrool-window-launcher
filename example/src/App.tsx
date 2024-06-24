@@ -1,8 +1,6 @@
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
-import './bootstrap-base.min.css';
 import Example from './views/Example/Example';
+import Github from './assets/github.svg?react';
 
 
 
@@ -12,9 +10,11 @@ function App() {
 
     return (
         <div className="App">
+            <a href="https://github.com/acrool/acrool-window-launcher" target="_blank" rel="noopener noreferrer">
+                <Github width={40} height={40}/>
+            </a>
 
-
-            <h1>Bear Window Launcher</h1>
+            <h1>Acrool Window Launcher</h1>
             <div className="">
                 <Example/>
             </div>
@@ -24,3 +24,5 @@ function App() {
 }
 
 export default App;
+
+
