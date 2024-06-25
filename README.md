@@ -1,5 +1,10 @@
 # Acrool Window Launcher
 
+
+<a href="https://acrool-window-launcher.pages.dev/" title="Acrool Window Launcher - This is a window launcher for front-end compatibility with browser issues when using window.open">
+    <img src="https://acrool-window-launcher.pages.dev/og.webp" alt="Acrool Window Launcher Logo"/>
+</a>
+
 <p align="center">
     This is a window launcher for front-end compatibility with browser issues when using window.open.
 </p>

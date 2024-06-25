@@ -14,7 +14,11 @@ function App() {
                 <Github width={40} height={40}/>
             </a>
 
-            <h1>Acrool Window Launcher</h1>
+            <div style={{textAlign: 'center', border: '1px solid #606060', display: 'flex', flexDirection: 'column', padding: '20px', margin: '20px 0'}}>
+                <img src="/logo.svg" style={{height: '100px'}} alt="Acrool Window Launcher"/>
+                <div style={{fontSize: '40px', color: '#fff', fontWeight: 700}}>Acrool Window Launcher</div>
+            </div>
+
 
             <Example/>
 
