@@ -14,6 +14,7 @@ import {objectKeys} from 'bear-jsutils/object';
 import {useRef} from 'react';
 import {Table} from '@acrool/react-table';
 import styled from 'styled-components';
+import {Col, Container, Row} from "@acrool/react-grid";
 
 
 const launcher = new Launcher({
@@ -134,10 +135,17 @@ const Example = () => {
         <div>Current Browser: <Label>{getBrowser()}</Label></div>
         <div>[userAgent] {navigator.userAgent}</div>
 
-        <div style={{display: 'flex', gap: '15px', width: '100%'}}>
-            {renderDeviceTable()}
-            {renderBrowserTable()}
-        </div>
+        <Container>
+            <Row className="gy-3">
+                <Col col={12} md={6}>
+                    {renderDeviceTable()}
+                </Col>
+                <Col col={12} md={6}>
+                    {renderBrowserTable()}
+                </Col>
+            </Row>
+        </Container>
+
 
 
 

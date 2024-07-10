@@ -1,17 +1,20 @@
 import './App.css';
 import Example from './views/Example';
 import Banner from './components/Banner';
+import {GridThemeProvider} from '@acrool/react-grid';
 
 
 
 
 function App() {
     return (
-        <div className="App">
-            <Banner/>
+        <GridThemeProvider>
+            <div className="App">
+                <Banner/>
 
-            <Example/>
-        </div>
+                <Example/>
+            </div>
+        </GridThemeProvider>
     );
 }
 
