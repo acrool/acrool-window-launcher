@@ -7,14 +7,15 @@
   resolved "https://registry.yarnpkg.com/@acrool/react-grid/-/react-grid-5.2.2.tgz#8de39e0709625ce22c024a587bc2d632edbd38a5"
   integrity sha512-23+iQrn9tgHW0Bg8oHtbtoxQoruFg2AoEHUCsqklRYjxZdXj0Nik32SfJ1svhGdLIzNwD0GSdl2GrQ5qNKncGA==
 
-"@acrool/react-table@5.1.1-alpha.0":
-  version "5.1.1-alpha.0"
-  resolved "https://registry.yarnpkg.com/@acrool/react-table/-/react-table-5.1.1-alpha.0.tgz#7c7339a9d10d17baae38263f466444001c712177"
-  integrity sha512-eAzqpt78Ruy2Zxx34ivq3El+OAGIOInJwHFlDCIbDKt3tCWc58odR+ZpzE6Zy8hO1RsHfAH4/sqH04BD7Ver0Q==
+"@acrool/react-table@5.1.2-alpha.1":
+  version "5.1.2-alpha.1"
+  resolved "https://registry.yarnpkg.com/@acrool/react-table/-/react-table-5.1.2-alpha.1.tgz#b622ebcb81eec227f134effcd86ee3ef600081fa"
+  integrity sha512-yZequq3s2hb6unvTZUvPIq58UGrTBJk8B4VbPoRqXyXpEROvCIIjatiSOj6ncRMnDiPK+4hCV7QicTHjz0mkpw==
 
-"@acrool/window-launcher@link:..":
-  version "0.0.0"
-  uid ""
+"@acrool/window-launcher@1.0.20":
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@acrool/window-launcher/-/window-launcher-1.0.20.tgz#c7e84c8f11bd9a57b93af799d509349c3e1a9863"
+  integrity sha512-L4aZ/BOvLzgsNTHwVzQvCCjjkk5dgdJxJMbCGqs1yfm/xDb77ZsJUM553tmZrEP6TVrDbnpqmd8NbzO58nWWHA==
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
