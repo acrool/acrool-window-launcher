@@ -38,22 +38,28 @@ yarn add @acrool/window-launcher
 ## Examples
 
 use in your page/component:
-```tsx
+```ts
 import {Launcher} from '@acrool/window-launcher';
 
 const launcher = new Launcher({
-    readyUrl: '/ready_page'
+    readyUrl: '/loading.html'
 });
 
-// This is to support safari, so it must be
-// Safari needs to pre-open tabs before requesting, other browsers do not need to
-launcher.ready();
+// 1. open loading page
+// 2. xhr requet
+// 3. replace loading page to new url
+launcher
+    .open(async () => {
+        const json = await axios.get('/url1.json');
+        return json.data.gameUrl;
+    })
+    .catch(e => {
+        logRef.current.append('\ncatch...');
+    })
+    .finally(() => {
+        logRef.current.append('\nfinally...');
+    });
 
-// async requet
-const response = await fetch('/url1.json');
-const json = await response.json();
-
-launcher.open(json.data);
 ```
 
 ## Check Browser

@@ -1,5 +1,6 @@
 {
   "data": {
-    "lobbyUrl": "https://bear-react-carousel.pages.dev/"
+    "lobbyUrl": "https://acrool.com/",
+    "desc": "This is the API that simulates the call, and then we use the url obtained in the API to window.open"
   }
 }
