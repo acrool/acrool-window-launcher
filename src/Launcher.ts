@@ -22,7 +22,7 @@ export default class Launcher {
     /**
      * 頁籤準備打開
      */
-    ready(isPreClose?: boolean){
+    private _ready(isPreClose?: boolean){
         if(typeof isPreClose !== 'undefined' && isPreClose) {
             this.close();
 
@@ -31,14 +31,13 @@ export default class Launcher {
         }
 
         this._childWindow = window.open(this._readyUrl);
-
         return this;
     }
 
     /**
      * 打開頁籤
      */
-    open(url: string){
+    private _open(url: string){
         if(this._childWindow && this._childWindow?.window) {
             this._childWindow.focus();
             this._childWindow.location.href = url;
@@ -51,9 +50,6 @@ export default class Launcher {
         return this;
     }
 
-
-
-
     /**
      * 關閉頁籤
      */
@@ -62,5 +58,22 @@ export default class Launcher {
             this._childWindow.close();
         }
         return this;
+    }
+
+
+    /**
+     * 返回一個 Promise，接收一個 Promise<string>，在 resolve 時自動打開新頁籤
+     */
+    open(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
+        this._ready(isPreClose);
+        return promise()
+            .then((url) => {
+                console.log('aaa');
+                return this._open(url);
+            })
+            .catch(e => {
+                this.close();
+                throw e;
+            });
     }
 }

@@ -10,22 +10,44 @@ import Launcher, {
     checkIsLineBrowser,
     checkIsFacebookBrowser, checkIsWebview, checkIsPWA
 } from '@acrool/window-launcher';
-import {objectKeys} from 'bear-jsutils/object';
+import {objectKeys} from '@acrool/js-utils/object';
 import {useRef} from 'react';
 import {Table} from '@acrool/react-table';
 import styled from 'styled-components';
-import {Col, Container, Row} from "@acrool/react-grid";
+import {Col, Container, Row} from '@acrool/react-grid';
+import {delay} from '@acrool/js-utils/promise';
+import {toast} from '@acrool/react-toaster';
 
 
 const launcher = new Launcher({
-    readyUrl: `${window.location.origin}/url1.json`,
+    readyUrl: `${window.location.origin}/loading.html`,
     isPreClose: false,
 });
 
 
-function delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+/**
+ * Mock call api
+ */
+const callSuccessAPI = async () => {
+    const [response] = await Promise.all([
+        fetch('/url1.json', {method: 'GET'}),
+        delay(1500),
+    ]);
+    return response.json();
+};
+
+
+/**
+ * Mock call api
+ */
+const callFailAPI = async () => {
+    const [response] = await Promise.all([
+        fetch('/xxxxxxxxx.json', {method: 'GET'}),
+        delay(1500),
+    ]);
+    return response.json();
+};
+
 
 const Example = () => {
     const logRef = useRef<HTMLDivElement>(null);
@@ -34,32 +56,56 @@ const Example = () => {
         launcher.close();
     };
 
-
-    const handleLauncher = async () => {
+    /**
+     * 啟動流程 (成功)
+     */
+    const handleSuccessLauncher = async () => {
         if(logRef && logRef.current){
 
             logRef.current.innerHTML = 'ready...';
-            launcher.ready();
 
-            logRef.current.innerHTML = 'fetching...';
+            launcher
+                .open(async () => {
+                    const json = await callSuccessAPI();
+                    const targetUrl: string = json.data.lobbyUrl;
+                    return targetUrl;
 
-            const testApiUrl = '/url1.json';
-            const [response] = await Promise.all([
-                fetch(testApiUrl, {method: 'GET'}),
-                delay(1500),
-            ]);
-            const json = await response.json();
-
-            const targetUrl = json.data.lobbyUrl;
-            logRef.current.innerHTML = `open url: ${targetUrl}`;
-
-            launcher.open(targetUrl);
-
-            logRef.current.append(' [done]');
+                })
+                .catch(e => {
+                    toast.error(e.message);
+                    logRef.current.append('\ncatch...');
+                })
+                .finally(() => {
+                    logRef.current.append('\nfinally...');
+                });
 
         }
     };
 
+    /**
+     * 啟動流程 (失敗)
+     */
+    const handleFailLauncher = async () => {
+        if(logRef && logRef.current){
+
+            logRef.current.innerHTML = 'ready...';
+
+            launcher
+                .open(async () => {
+                    const json = await callFailAPI();
+                    const targetUrl: string = json.data.lobbyUrl;
+                    return targetUrl;
+                })
+                .catch(e => {
+                    toast.error(e.message);
+                    logRef.current.append('\ncatch...');
+                })
+                .finally(() => {
+                    logRef.current.append('\nfinally...');
+                });
+
+        }
+    };
 
     const os = {
         Android: checkIsAndroid(),
@@ -125,10 +171,11 @@ const Example = () => {
 
 
     return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
-        <div ref={logRef}/>
+        <Log ref={logRef}/>
 
         <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
-            <Button type="button" onClick={handleLauncher} >Launcher Open</Button>
+            <SuccessButton type="button" onClick={handleSuccessLauncher} >Launcher Open (Success)</SuccessButton>
+            <FailButton type="button" onClick={handleFailLauncher} >Launcher Open (Fail)</FailButton>
             <CloseButton type="button" onClick={handleClose}>Close</CloseButton>
         </div>
 
@@ -145,19 +192,21 @@ const Example = () => {
                 </Col>
             </Row>
         </Container>
-
-
-
-
-
-
     </div>;
 };
 
 export default Example;
 
 
-const Button = styled.button`
+const Log = styled.div`
+  white-space: pre-line;
+`;
+
+const FailButton = styled.button`
+  background-color: #a92c58;
+  color: #fff;
+`;
+const SuccessButton = styled.button`
   background-color: #2c32a9;
   color: #fff;
 `;
