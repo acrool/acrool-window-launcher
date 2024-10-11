@@ -8,17 +8,17 @@
     "build": "vite build",
     "preview": "vite preview",
     "pages:dev": "wrangler pages dev --proxy 3000 -- yarn dev",
-    "pages:deploy": "NODE_VERSION=18 yarn run build && wrangler pages deploy ./dist"
+    "pages:deploy": "NODE_VERSION=18 yarn build-storybook && wrangler pages deploy ./dist --project-name=acrool-window-launcher --branch main"
   },
   "resolutions": {
     "dayjs": "1.x",
     "styled-components": "5.3.9"
   },
   "dependencies": {
-    "@acrool/js-utils": "3.2.10",
-    "@acrool/react-grid": "5.2.3",
-    "@acrool/react-table": "5.1.3",
-    "@acrool/react-toaster": "^3.1.8",
+    "@acrool/js-utils": "3.2.12",
+    "@acrool/react-grid": "5.2.4",
+    "@acrool/react-table": "5.1.4",
+    "@acrool/react-toaster": "^3.1.9",
     "@acrool/window-launcher": "link:..",
     "@swc/core": "^1.3.68",
     "@swc/plugin-styled-components": "^1.5.68",
