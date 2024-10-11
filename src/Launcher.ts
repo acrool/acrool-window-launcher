@@ -1,5 +1,13 @@
-import {getBrowser, EBrowser} from './utils';
+import {
+    getBrowser,
+    EBrowser,
+    checkIsLineBrowser,
+    checkIsWechatBrowser,
+    checkIsFacebookBrowser,
+} from './utils';
 import {ILauncherOption} from './types';
+
+
 
 
 /**
@@ -30,7 +38,14 @@ export default class Launcher {
             this.close();
         }
 
-        this._childWindow = window.open(this._readyUrl);
+        const isForbidWindowOpen =
+            checkIsLineBrowser() ||
+            checkIsWechatBrowser() ||
+            checkIsFacebookBrowser();
+
+        if(!isForbidWindowOpen){
+            this._childWindow = window.open(this._readyUrl);
+        }
         return this;
     }
 
@@ -41,10 +56,11 @@ export default class Launcher {
         if(this._childWindow && this._childWindow?.window) {
             this._childWindow.focus();
             this._childWindow.location.href = url;
-
         }else{
             this._childWindow = window.open(url);
-
+            if(this._childWindow === null){
+                window.location.href = url;
+            }
         }
 
         return this;
@@ -68,7 +84,6 @@ export default class Launcher {
         this._ready(isPreClose);
         return promise()
             .then((url) => {
-                console.log('aaa');
                 return this._open(url);
             })
             .catch(e => {
