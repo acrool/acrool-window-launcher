@@ -89,6 +89,34 @@ import Launcher, {
 } from '@acrool/window-launcher';
 ```
 
+## In Global
+
+Here, declare things that go in the global namespace, or augment
+existing declarations in the global namespace
+
+typings/global.d.ts
+
+```ts
+import {Launcher} from '@acrool/window-launcher';
+
+declare global {
+    interface Window {
+        ActiveXObject: string
+        dataLayer: any[]
+        launcher: Launcher
+    }
+}
+```
+
+tsconfig.json
+
+```json
+{
+    "files": [
+        "typings/global.d.ts"
+    ]
+}
+```
 
 
 There is also a example that you can play with it:
