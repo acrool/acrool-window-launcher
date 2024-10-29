@@ -17,6 +17,7 @@ export default class Launcher {
     _childWindow: WindowProxy|null = null;
     _readyUrl: string;
     _isPreClose: boolean;
+    _isEnableCatchClose: boolean;
 
     get name(): EBrowser{
         return getBrowser();
@@ -25,6 +26,7 @@ export default class Launcher {
     constructor(option?: ILauncherOption) {
         this._readyUrl = option?.readyUrl ?? 'about:blank';
         this._isPreClose = option?.isPreClose ?? false;
+        this._isEnableCatchClose = option?.isEnableCatchClose ?? true;
     }
 
     /**
@@ -87,7 +89,9 @@ export default class Launcher {
                 return this._open(url);
             })
             .catch(e => {
-                this.close();
+                if(this._isEnableCatchClose){
+                    this.close();
+                }
                 throw e;
             });
     }

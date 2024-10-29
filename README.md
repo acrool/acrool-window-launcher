@@ -42,7 +42,8 @@ use in your page/component:
 import {Launcher} from '@acrool/window-launcher';
 
 const launcher = new Launcher({
-    readyUrl: '/loading.html'
+    readyUrl: '/loading.html',
+    isEnableCatchClose: true,
 });
 
 // 1. open loading page
