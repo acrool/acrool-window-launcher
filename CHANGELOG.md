@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/acrool/acrool-window-launcher/compare/v2.0.2-alpha.0...v2.0.2) (2025-01-14)
+
 ### [2.0.2-alpha.0](https://github.com/acrool/acrool-window-launcher/compare/v2.0.1...v2.0.2-alpha.0) (2024-10-29)
 
 ### [2.0.1](https://github.com/acrool/acrool-window-launcher/compare/v2.0.1-alpha.0...v2.0.1) (2024-10-11)
