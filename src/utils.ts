@@ -193,3 +193,15 @@ export function checkIsWebview() {
 
 }
 
+
+/**
+ * 寫入HTML
+ * @param target
+ * @param html
+ */
+export function writeHtml(target: Document, html: string) {
+    target.open();
+    target.write(html);
+    target.close();
+}
+

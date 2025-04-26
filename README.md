@@ -50,9 +50,25 @@ const launcher = new Launcher({
 // 2. xhr requet
 // 3. replace loading page to new url
 launcher
-    .open(async () => {
+    .openUrl(async () => {
         const json = await axios.get('/url1.json');
         return json.data.gameUrl;
+    })
+    .catch(e => {
+        logRef.current.append('\ncatch...');
+    })
+    .finally(() => {
+        logRef.current.append('\nfinally...');
+    });
+
+
+// 1. open loading page
+// 2. xhr requet
+// 3. replace loading page to new html
+launcher
+    .openHtml(async () => {
+        const json = await axios.get('/html.json');
+        return json.data.html;
     })
     .catch(e => {
         logRef.current.append('\ncatch...');

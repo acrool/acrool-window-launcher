@@ -28,9 +28,20 @@ const launcher = new Launcher({
 /**
  * Mock call api
  */
-const callSuccessAPI = async () => {
+const callUrlSuccessAPI = async () => {
     const [response] = await Promise.all([
         fetch('/url1.json', {method: 'GET'}),
+        delay(1500),
+    ]);
+    return response.json();
+};
+
+/**
+ * Mock call api
+ */
+const callHtmlSuccessAPI = async () => {
+    const [response] = await Promise.all([
+        fetch('/html.json', {method: 'GET'}),
         delay(1500),
     ]);
     return response.json();
@@ -40,7 +51,7 @@ const callSuccessAPI = async () => {
 /**
  * Mock call api
  */
-const callFailAPI = async () => {
+const callUrlFailAPI = async () => {
     const [response] = await Promise.all([
         fetch('/xxxxxxxxx.json', {method: 'GET'}),
         delay(1500),
@@ -56,6 +67,23 @@ const Example = () => {
         launcher.close();
     };
 
+
+    const handleHtmlLauncher = () => {
+        launcher
+            .openHtml(async () => {
+                const json = await callHtmlSuccessAPI();
+                return json.data.html;
+            }).catch(e => {
+                toast.error(e.message);
+                logRef.current.append('\ncatch...');
+            })
+            .finally(() => {
+                logRef.current.append('\nfinally...');
+            });
+    };
+
+
+
     /**
      * 啟動流程 (成功)
      */
@@ -65,11 +93,10 @@ const Example = () => {
             logRef.current.innerHTML = 'ready...';
 
             launcher
-                .open(async () => {
-                    const json = await callSuccessAPI();
+                .openUrl(async () => {
+                    const json = await callUrlSuccessAPI();
                     const targetUrl: string = json.data.lobbyUrl;
                     return targetUrl;
-
                 })
                 .catch(e => {
                     toast.error(e.message);
@@ -91,8 +118,8 @@ const Example = () => {
             logRef.current.innerHTML = 'ready...';
 
             launcher
-                .open(async () => {
-                    const json = await callFailAPI();
+                .openUrl(async () => {
+                    const json = await callUrlFailAPI();
                     const targetUrl: string = json.data.lobbyUrl;
                     return targetUrl;
                 })
@@ -177,6 +204,9 @@ const Example = () => {
             <SuccessButton type="button" onClick={handleSuccessLauncher} >Launcher Open (Success)</SuccessButton>
             <FailButton type="button" onClick={handleFailLauncher} >Launcher Open (Fail)</FailButton>
             <CloseButton type="button" onClick={handleClose}>Close</CloseButton>
+        </div>
+        <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
+            <SuccessButton type="button" onClick={handleHtmlLauncher} >Launcher Open Blank</SuccessButton>
         </div>
 
         <div>Current Browser: <Label>{getBrowser()}</Label></div>

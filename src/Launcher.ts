@@ -3,7 +3,7 @@ import {
     EBrowser,
     checkIsLineBrowser,
     checkIsWechatBrowser,
-    checkIsFacebookBrowser,
+    checkIsFacebookBrowser, writeHtml,
 } from './utils';
 import {ILauncherOption} from './types';
 
@@ -53,8 +53,12 @@ export default class Launcher {
 
     /**
      * 打開頁籤
+     *
+     * 嘗試在 既有的新開頁籤 (childWindow) 裡導航到新的網址，
+     * 如果沒有現成的頁籤，就新開一個，
+     * 如果連新開也失敗（例如被瀏覽器阻擋），就直接導到本頁。
      */
-    private _open(url: string){
+    private _openUrl(url: string){
         if(this._childWindow && this._childWindow?.window) {
             this._childWindow.focus();
             this._childWindow.location.href = url;
@@ -62,6 +66,25 @@ export default class Launcher {
             this._childWindow = window.open(url);
             if(this._childWindow === null){
                 window.location.href = url;
+            }
+        }
+
+        return this;
+    }
+
+    /**
+     * 打開頁籤
+     */
+    private _openHtml(html: string){
+        if(this._childWindow && this._childWindow?.window) {
+            this._childWindow.focus();
+            writeHtml(this._childWindow.document, html);
+        }else{
+            this._childWindow = window.open('');
+            if(this._childWindow === null){
+                writeHtml(document, html);
+            } else {
+                writeHtml(this._childWindow.document, html);
             }
         }
 
@@ -82,11 +105,28 @@ export default class Launcher {
     /**
      * 返回一個 Promise，接收一個 Promise<string>，在 resolve 時自動打開新頁籤
      */
-    open(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
+    openHtml(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
+        this._ready(isPreClose);
+        return promise()
+            .then((html) => {
+                return this._openHtml(html);
+            })
+            .catch(e => {
+                if(this._isEnableCatchClose){
+                    this.close();
+                }
+                throw e;
+            });
+    }
+
+    /**
+     * 返回一個 Promise，接收一個 Promise<string>，在 resolve 時自動打開新頁籤
+     */
+    openUrl(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
         this._ready(isPreClose);
         return promise()
             .then((url) => {
-                return this._open(url);
+                return this._openUrl(url);
             })
             .catch(e => {
                 if(this._isEnableCatchClose){
