@@ -1,6 +1,6 @@
 {
   "name": "@acrool/window-launcher",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "This is a window launcher for front-end compatibility with browser issues when using window.open.",
   "keywords": [
     "typescript",
