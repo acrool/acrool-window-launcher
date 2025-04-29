@@ -5,7 +5,7 @@ import {
     checkIsWechatBrowser,
     checkIsFacebookBrowser, writeHtml,
 } from './utils';
-import {ILauncherOption} from './types';
+import {ILauncherOption, IOpenData, TOpenType} from './types';
 
 
 
@@ -14,13 +14,17 @@ import {ILauncherOption} from './types';
  * 瀏覽器頁籤啟動器
  */
 export default class Launcher {
-    _childWindow: WindowProxy|null = null;
-    _readyUrl: string;
-    _isPreClose: boolean;
-    _isEnableCatchClose: boolean;
+    private _childWindow: WindowProxy|null = null;
+    private _readyUrl: string;
+    private _isPreClose: boolean;
+    private _isEnableCatchClose: boolean;
 
     get name(): EBrowser{
         return getBrowser();
+    }
+
+    get childWindow (): WindowProxy|null {
+        return this._childWindow;
     }
 
     constructor(option?: ILauncherOption) {
@@ -52,7 +56,7 @@ export default class Launcher {
     }
 
     /**
-     * 打開頁籤
+     * 使用 URL 打開頁籤
      *
      * 嘗試在 既有的新開頁籤 (childWindow) 裡導航到新的網址，
      * 如果沒有現成的頁籤，就新開一個，
@@ -73,7 +77,7 @@ export default class Launcher {
     }
 
     /**
-     * 打開頁籤
+     * 使用 HTML 打開頁籤
      */
     private _openHtml(html: string){
         if(this._childWindow && this._childWindow?.window) {
@@ -105,28 +109,17 @@ export default class Launcher {
     /**
      * 返回一個 Promise，接收一個 Promise<string>，在 resolve 時自動打開新頁籤
      */
-    openHtml(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
+    open(promise: () => Promise<IOpenData|string>, isPreClose?: boolean): Promise<this> {
         this._ready(isPreClose);
         return promise()
-            .then((html) => {
-                return this._openHtml(html);
-            })
-            .catch(e => {
-                if(this._isEnableCatchClose){
-                    this.close();
+            .then(data => {
+                if (typeof data === 'object' && 'type' in data) {
+                    if (data.type === 'html') {
+                        return this._openHtml(data.value);
+                    }
+                    return this._openUrl(data.value);
                 }
-                throw e;
-            });
-    }
-
-    /**
-     * 返回一個 Promise，接收一個 Promise<string>，在 resolve 時自動打開新頁籤
-     */
-    openUrl(promise: () => Promise<string>, isPreClose?: boolean): Promise<this> {
-        this._ready(isPreClose);
-        return promise()
-            .then((url) => {
-                return this._openUrl(url);
+                return this._openUrl(data);
             })
             .catch(e => {
                 if(this._isEnableCatchClose){

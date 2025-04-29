@@ -7,3 +7,8 @@ export interface ILauncherOption {
     isEnableCatchClose?: boolean       // 過程錯誤自動關閉預開視窗
 }
 
+export type TOpenType = 'url' | 'html';
+export interface IOpenData {
+    type: TOpenType,
+    value: string,
+}

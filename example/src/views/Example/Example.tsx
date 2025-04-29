@@ -68,11 +68,17 @@ const Example = () => {
     };
 
 
+    /**
+     * 開啟使用 HTML
+     */
     const handleHtmlLauncher = () => {
         launcher
-            .openHtml(async () => {
+            .open(async () => {
                 const json = await callHtmlSuccessAPI();
-                return json.data.html;
+                return {
+                    type: 'html',
+                    value: json.data.html,
+                };
             }).catch(e => {
                 toast.error(e.message);
                 logRef.current.append('\ncatch...');
@@ -93,7 +99,7 @@ const Example = () => {
             logRef.current.innerHTML = 'ready...';
 
             launcher
-                .openUrl(async () => {
+                .open(async () => {
                     const json = await callUrlSuccessAPI();
                     const targetUrl: string = json.data.lobbyUrl;
                     return targetUrl;
@@ -118,7 +124,7 @@ const Example = () => {
             logRef.current.innerHTML = 'ready...';
 
             launcher
-                .openUrl(async () => {
+                .open(async () => {
                     const json = await callUrlFailAPI();
                     const targetUrl: string = json.data.lobbyUrl;
                     return targetUrl;

@@ -15,20 +15,6 @@ export enum EBrowser {
 }
 
 
-/**
- * 非同步方式開啟
- * 用來避免呼叫非同步請求時，在呼叫API導致被 iOS Safari 安全性禁止
- * @param url
- */
-// export const asyncOpen = (url: string): Promise<WindowProxy|null> => {
-//     return new Promise(resolve => {
-//         window.requestAnimationFrame(() => {
-//             const childWindow = window.open(url);
-//             resolve(childWindow);
-//         });
-//     });
-//
-// };
 
 
 /**
