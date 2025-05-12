@@ -1,11 +1,11 @@
-import {
-    getBrowser,
-    EBrowser,
-    checkIsLineBrowser,
-    checkIsWechatBrowser,
-    checkIsFacebookBrowser, writeHtml,
-} from './utils';
 import {ILauncherOption, IOpenData, TOpenType} from './types';
+import {
+    checkIsFacebookBrowser,     checkIsLineBrowser,
+    checkIsWechatBrowser,
+    EBrowser,
+    getBrowser,
+    writeHtml,
+} from './utils';
 
 
 

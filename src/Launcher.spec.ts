@@ -1,6 +1,6 @@
 import Launcher from './Launcher';
-import * as utils from './utils';
 import {IOpenData} from './types';
+import * as utils from './utils';
 
 describe('Launcher', () => {
     let launcher: Launcher;

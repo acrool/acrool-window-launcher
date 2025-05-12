@@ -1,22 +1,21 @@
-import Launcher, {
-    getBrowser,
-    checkIsMobile,
-    checkIsChromeBrowser,
-    checkIsAndroid,
-    checkIsIOS,
-    checkIsSafariBrowser,
-    checkIsFirefoxBrowser,
-    checkIsEdgeBrowser,
-    checkIsLineBrowser,
-    checkIsFacebookBrowser, checkIsWebview, checkIsPWA
-} from '@acrool/window-launcher';
 import {objectKeys} from '@acrool/js-utils/object';
-import {useRef} from 'react';
-import {Table} from '@acrool/react-table';
-import styled from 'styled-components';
-import {Col, Container, Row} from '@acrool/react-grid';
 import {delay} from '@acrool/js-utils/promise';
+import {Col, Container, Flex, Row} from '@acrool/react-grid';
+import {Table} from '@acrool/react-table';
 import {toast} from '@acrool/react-toaster';
+import Launcher, {
+    checkIsAndroid,
+    checkIsChromeBrowser,
+    checkIsEdgeBrowser,
+    checkIsFacebookBrowser,     checkIsFirefoxBrowser,
+    checkIsIOS,
+    checkIsLineBrowser,
+    checkIsMobile,
+    checkIsPWA,
+    checkIsSafariBrowser,
+    checkIsWebview,     getBrowser} from '@acrool/window-launcher';
+import {useRef} from 'react';
+import styled from 'styled-components';
 
 
 const launcher = new Launcher({
@@ -203,32 +202,39 @@ const Example = () => {
     };
 
 
-    return <div style={{display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'flex-start', width: '100%'}}>
+    return <Container>
         <Log ref={logRef}/>
 
-        <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
-            <SuccessButton type="button" onClick={handleSuccessLauncher} >Launcher Open (Success)</SuccessButton>
-            <FailButton type="button" onClick={handleFailLauncher} >Launcher Open (Fail)</FailButton>
-            <CloseButton type="button" onClick={handleClose}>Close</CloseButton>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'center', width: '100%', gap: '10px'}}>
-            <SuccessButton type="button" onClick={handleHtmlLauncher} >Launcher Open Blank</SuccessButton>
-        </div>
 
-        <div>Current Browser: <Label>{getBrowser()}</Label></div>
-        <div>[userAgent] {navigator.userAgent}</div>
+        <Row className="mb-5">
+            <Col col={12}>
+                <Flex column className="gap-2 align-items-center">
+                    <Flex className="gap-2">
+                        <SuccessButton type="button" onClick={handleSuccessLauncher} >Launcher Open (Success)</SuccessButton>
+                        <FailButton type="button" onClick={handleFailLauncher} >Launcher Open (Fail)</FailButton>
+                        <CloseButton type="button" onClick={handleClose}>Close</CloseButton>
+                    </Flex>
+                    <Flex>
+                        <SuccessButton type="button" onClick={handleHtmlLauncher} >Launcher Open Blank</SuccessButton>
+                    </Flex>
 
-        <Container>
-            <Row className="gy-3">
-                <Col col={12} md={6}>
-                    {renderDeviceTable()}
-                </Col>
-                <Col col={12} md={6}>
-                    {renderBrowserTable()}
-                </Col>
-            </Row>
-        </Container>
-    </div>;
+                    <Flex className="gap-2">Current Browser: <Label>{getBrowser()}</Label></Flex>
+                    <Flex>[userAgent] {navigator.userAgent}</Flex>
+                </Flex>
+
+
+
+            </Col>
+        </Row>
+        <Row className="gy-3">
+            <Col col={12} md={6}>
+                {renderDeviceTable()}
+            </Col>
+            <Col col={12} md={6}>
+                {renderBrowserTable()}
+            </Col>
+        </Row>
+    </Container>;
 };
 
 export default Example;
@@ -257,7 +263,8 @@ const Label = styled.label`
   color: #fff;
   padding: 2px 5px;
   border-radius: 4px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+
 `;
