@@ -45,14 +45,24 @@ const launcher = new Launcher({
     readyUrl: '/loading.html',
     isEnableCatchClose: true,
 });
+```
 
-// 1. open loading page
-// 2. xhr requet
-// 3. replace loading page to new url
+1. open loading page
+2. xhr requet
+3. replace loading page to new url
+
+### Open URL
+
+```tsx
 launcher
-    .openUrl(async () => {
+    .open(async () => {
         const json = await axios.get('/url1.json');
         return json.data.gameUrl;
+        // or
+        // return {
+        //     type: 'url',
+        //     value: json.data.html,
+        // };
     })
     .catch(e => {
         logRef.current.append('\ncatch...');
@@ -60,15 +70,19 @@ launcher
     .finally(() => {
         logRef.current.append('\nfinally...');
     });
+```
 
 
-// 1. open loading page
-// 2. xhr requet
-// 3. replace loading page to new html
+### Open HTML
+
+```tsx
 launcher
-    .openHtml(async () => {
+    .open(async () => {
         const json = await axios.get('/html.json');
-        return json.data.html;
+        return {
+            type: 'html',
+            value: json.data.html,
+        };
     })
     .catch(e => {
         logRef.current.append('\ncatch...');
@@ -76,7 +90,31 @@ launcher
     .finally(() => {
         logRef.current.append('\nfinally...');
     });
+```
 
+
+
+### Open BLOB
+
+ex: pdf preview
+
+```tsx
+let url = '';
+launcher
+    .open(async () => {
+        const json = await axios.get('/blob.json');
+
+        url = URL.createObjectURL(base64ToBlob(res.buffer, res.mimeType));
+        return url;
+    })
+    .catch(e => {
+        logRef.current.append('\ncatch...');
+    })
+    .finally((url) => {
+        URL.revokeObjectURL(url);
+        
+        logRef.current.append('\nfinally...');
+    });
 ```
 
 ## Check Browser

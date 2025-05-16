@@ -103,6 +103,9 @@ const Example = () => {
                     const targetUrl: string = json.data.lobbyUrl;
                     return targetUrl;
                 })
+                .then(data => {
+                    console.log('xxx',data);
+                })
                 .catch(e => {
                     toast.error(e.message);
                     logRef.current.append('\ncatch...');
