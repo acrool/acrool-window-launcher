@@ -39,9 +39,11 @@ jobs:
               run: yarn install
 
             - name: Start Storybook
+              working-directory: example
               run: yarn storybook &
 
             - name: Wait for Storybook to be ready
+              working-directory: example
               run: npx wait-on http://localhost:6006
 
             - name: Install Playwright Browsers
@@ -49,7 +51,9 @@ jobs:
               run: yarn install
 
             - name: Install Playwright Browsers
+              working-directory: playwright
               run: yarn playwright install --with-deps
 
             - name: Run Playwright tests
+              working-directory: playwright
               run: yarn test
