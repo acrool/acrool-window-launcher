@@ -1,0 +1,54 @@
+name: Playwright Tests
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+    pull_request:
+        branches:
+            - main
+            - develop
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+
+            - name: Install root dependencies
+              run: yarn install
+
+            - name: Build packages
+              run: yarn build
+
+            - name: Replace local links with actual versions
+              working-directory: example
+              run: |
+                sed -i 's#"@acrool/window-launcher": "link:.."#"@acrool/window-launcher": "latest"#' package.json
+
+            - name: Install example dependencies
+              working-directory: example
+              run: yarn install
+
+            - name: Install Playwright Browsers
+              working-directory: playwright
+              run: yarn playwright install --with-deps
+
+            - name: Start Storybook
+              working-directory: example
+              run: yarn storybook &
+
+            - name: Wait for Storybook to be ready
+              run: npx wait-on http://localhost:6006
+
+            - name: Run Playwright tests
+              working-directory: playwright
+              run: yarn test
