@@ -28,7 +28,8 @@ jobs:
                   node-version: '20'
 
             - name: Fix docker config permission (optional)
-              run: sudo rm -f /root/.docker/config.json || true
+              run: |
+                sudo rm -f /root/.docker/config.json || true
 
             - name: Install root dependencies
               run: yarn install
