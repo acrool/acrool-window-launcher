@@ -15,6 +15,8 @@ jobs:
         runs-on: ubuntu-latest
         container:
             image: mcr.microsoft.com/playwright:v1.52.0-jammy
+        env:
+            HOME: /root
 
         steps:
             - name: Checkout repository
