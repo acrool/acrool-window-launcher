@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
+    "storybook:no-open": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
     "pages:dev": "wrangler pages dev --proxy 3000 -- yarn dev",
     "pages:deploy": "NODE_VERSION=20 yarn build-storybook && wrangler pages deploy ./storybook-static --project-name=acrool-react-dialog --branch main"

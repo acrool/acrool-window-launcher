@@ -5,6 +5,7 @@
     "license": "MIT",
     "scripts": {
         "test": "playwright test",
+        "test:webkit": "playwright test --project=webkit",
         "test:ui": "playwright test --ui"
     },
     "devDependencies": {

@@ -27,6 +27,9 @@ jobs:
               with:
                   node-version: '20'
 
+            - name: Fix docker config permission (optional)
+              run: sudo rm -f /root/.docker/config.json || true
+
             - name: Install root dependencies
               run: yarn install
 
@@ -46,13 +49,9 @@ jobs:
               working-directory: playwright
               run: yarn install
 
-            - name: Start Storybook
-              working-directory: example
-              run: yarn storybook &
-
-            - name: Wait for Storybook to be ready
-              run: npx wait-on http://localhost:6006
-
-            - name: Run Playwright tests
-              working-directory: playwright
-              run: yarn test
+            - name: Run Storybook and Playwright tests
+              run: |
+                npx start-server-and-test \
+                  'yarn --cwd example storybook:no-open' \
+                  http://localhost:6006 \
+                  'yarn --cwd playwright test'
