@@ -22,6 +22,8 @@ const Example = () => {
         Android: checkIsAndroid(),
         iOS: checkIsIOS(),
         Mobile: checkIsMobile(),
+        hasTouch: 'ontouchstart' in window,
+        hasCoarsePointer: window.matchMedia('(any-pointer: coarse)').matches,
     };
     const browser = {
         Chrome: checkIsChromeBrowser(),
@@ -89,8 +91,6 @@ const Example = () => {
                     <Flex column className="gap-2 align-items-center">
                         <Flex>[userAgent] {navigator.userAgent}</Flex>
                     </Flex>
-
-
                 </Col>
             </Row>
             <Row className="gy-3">
